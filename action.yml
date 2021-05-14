@@ -1,0 +1,12 @@
+name: 'Package.json Action Badges'
+description: 'Package.json Action Badges'
+branding:
+  icon: 'info'
+  color: 'blue'
+inputs:
+  integration:
+    description: "One of: 'license', 'node-version', 'version'"
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
