@@ -1,5 +1,5 @@
 {
-  "name": "@action-badges/package-json",
+  "name": "@action-badges/package-json-badges",
   "description": "Package.json Action Badges",
   "version": "0.0.0",
   "private": true,
@@ -13,9 +13,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/action-badges/package-json.git"
+    "url": "git+https://github.com/action-badges/package-json-badges.git"
   },
-  "homepage": "https://github.com/action-badges/package-json",
+  "homepage": "https://github.com/action-badges/package-json-badges",
   "author": "chris48s",
   "license": "MIT",
   "dependencies": {
