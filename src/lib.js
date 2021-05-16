@@ -1,7 +1,8 @@
 "use strict";
 
 const { promises: fs } = require("fs");
-const { BaseAction } = require("@action-badges/core");
+const core = require("@actions/core");
+const { BaseAction, invoke } = require("@action-badges/core");
 
 const ignoredVersionPatterns = /^[^0-9]|[0-9]{4}-[0-9]{2}-[0-9]{2}/;
 function addv(version) {
@@ -104,8 +105,24 @@ class PackageJsonNodeVersion extends BaseAction {
   }
 }
 
+async function run() {
+  const integration = core.getInput("integration", { required: true });
+  const validIntegrations = {
+    license: PackageJsonLicense,
+    "node-version": PackageJsonNodeVersion,
+    version: PackageJsonVersion,
+  };
+  if (integration in validIntegrations) {
+    return await invoke(validIntegrations[integration]);
+  }
+  core.setFailed(
+    `integration must be one of (${Object.keys(validIntegrations)})`
+  );
+}
+
 module.exports = {
   PackageJsonLicense,
   PackageJsonNodeVersion,
   PackageJsonVersion,
+  run,
 };
