@@ -34,7 +34,7 @@ describe("PackageJsonLicense", function () {
 });
 
 describe("PackageJsonVersion", function () {
-  it("throws if license is missing", async function () {
+  it("throws if version is missing", async function () {
     class PackageJsonVersionStub extends PackageJsonVersion {
       fetch() {
         return {};
