@@ -1,5 +1,7 @@
 # package-json-badges
 
+Serverless badges from your `package.json` with Github Actions.
+
 [![Run tests](https://github.com/action-badges/package-json-badges/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/action-badges/package-json-badges/actions/workflows/test.yml)
 [![Build Dist](https://github.com/action-badges/package-json-badges/actions/workflows/build-dist.yml/badge.svg?branch=main)](https://github.com/action-badges/package-json-badges/actions/workflows/build-dist.yml)
 
@@ -37,3 +39,6 @@ jobs:
           github-token: '${{ secrets.GITHUB_TOKEN }}'
           integration: node-version
 ```
+
+All of the standard action-badges [parameters](https://github.com/action-badges/core/blob/main/docs/github-action.md#parameters) can also be used.
+
