@@ -3,32 +3,7 @@
 const { promises: fs } = require("fs");
 const core = require("@actions/core");
 const { BaseAction, invoke } = require("@action-badges/core");
-
-const ignoredVersionPatterns = /^[^0-9]|[0-9]{4}-[0-9]{2}-[0-9]{2}/;
-function addv(version) {
-  version = `${version}`;
-  if (version.startsWith("v") || ignoredVersionPatterns.test(version)) {
-    return version;
-  } else {
-    return `v${version}`;
-  }
-}
-
-function versionColor(version) {
-  if (typeof version !== "string" && typeof version !== "number") {
-    throw new Error(`Can't generate a version color for ${version}`);
-  }
-  version = `${version}`;
-  let first = version[0];
-  if (first === "v") {
-    first = version[1];
-  }
-  if (first === "0" || /alpha|beta|snapshot|dev|pre/i.test(version)) {
-    return "orange";
-  } else {
-    return "blue";
-  }
-}
+const { addv, semverVersionColor } = require("./formatters");
 
 class PackageJsonLicense extends BaseAction {
   get label() {
@@ -75,7 +50,7 @@ class PackageJsonVersion extends BaseAction {
     const packageJson = await this.validate(await this.fetch());
     return {
       message: addv(packageJson.version),
-      messageColor: versionColor(packageJson.version),
+      messageColor: semverVersionColor(packageJson.version),
     };
   }
 }
