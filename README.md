@@ -16,21 +16,21 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Make version Badge
-        uses: action-badges/package-json-badges@master
+        uses: action-badges/package-json-badges@0.1.0
         with:
           file-name: package-version.svg
           github-token: '${{ secrets.GITHUB_TOKEN }}'
           integration: version
 
       - name: Make license badge
-        uses: action-badges/package-json-badges@master
+        uses: action-badges/package-json-badges@0.1.0
         with:
           file-name: package-license.svg
           github-token: '${{ secrets.GITHUB_TOKEN }}'
           integration: license
 
       - name: Make node version badge
-        uses: action-badges/package-json-badges@master
+        uses: action-badges/package-json-badges@0.1.0
         with:
           file-name: package-node-version.svg
           github-token: '${{ secrets.GITHUB_TOKEN }}'
