@@ -1,0 +1,16 @@
+name: Tag Badge
+on: create
+
+jobs:
+  build:
+    if: github.event.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Write Tag badge
+        uses: action-badges/core@main
+        with:
+          label: tag
+          message: "${{ github.event.ref }}"
+          message-color: blue
+          file-name: github-tag.svg
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
