@@ -8,6 +8,8 @@ Serverless badges from your `package.json` with Github Actions.
 ![license](https://raw.githubusercontent.com/action-badges/package-json-badges/badges/.badges/main/package-license.svg)
 ![node](https://raw.githubusercontent.com/action-badges/package-json-badges/badges/.badges/main/package-node-version.svg)
 
+Examples:
+
 ```yaml
 name: Make package.json Badges
 on:
@@ -22,21 +24,21 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Make version Badge
-        uses: action-badges/package-json-badges@0.1.0
+        uses: action-badges/package-json-badges@0.2.0
         with:
           file-name: package-version.svg
           github-token: '${{ secrets.GITHUB_TOKEN }}'
           integration: version
 
       - name: Make license badge
-        uses: action-badges/package-json-badges@0.1.0
+        uses: action-badges/package-json-badges@0.2.0
         with:
           file-name: package-license.svg
           github-token: '${{ secrets.GITHUB_TOKEN }}'
           integration: license
 
       - name: Make node version badge
-        uses: action-badges/package-json-badges@0.1.0
+        uses: action-badges/package-json-badges@0.2.0
         with:
           file-name: package-node-version.svg
           github-token: '${{ secrets.GITHUB_TOKEN }}'
