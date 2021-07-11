@@ -1,7 +1,5 @@
-"use strict";
-
-const assert = require("assert");
-const { semverVersionColor } = require("./formatters");
+import assert from "assert";
+import { semverVersionColor } from "./formatters.js";
 
 describe("semverVersionColor", function () {
   it("generates correct colors for versions", function () {

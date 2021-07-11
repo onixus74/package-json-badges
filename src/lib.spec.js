@@ -1,12 +1,10 @@
-"use strict";
-
-const assert = require("assert");
-const {
+import assert from "assert";
+import {
   PackageJsonLicense,
   PackageJsonNodeVersion,
   PackageJsonVersion,
   getAction,
-} = require("./lib");
+} from "./lib.js";
 
 describe("PackageJsonLicense", function () {
   it("throws if license is missing", async function () {

@@ -1,9 +1,7 @@
-"use strict";
-
-const { promises: fs } = require("fs");
-const core = require("@actions/core");
-const { BaseAction } = require("@action-badges/core");
-const { addv, semverVersionColor } = require("./formatters");
+import { promises as fs } from "fs";
+import core from "@actions/core";
+import { BaseAction } from "@action-badges/core";
+import { addv, semverVersionColor } from "./formatters.js";
 
 class PackageJsonLicense extends BaseAction {
   get label() {
@@ -98,7 +96,7 @@ function getAction() {
   fail(`integration must be one of (${Object.keys(validIntegrations)})`);
 }
 
-module.exports = {
+export {
   PackageJsonLicense,
   PackageJsonNodeVersion,
   PackageJsonVersion,

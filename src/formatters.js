@@ -1,6 +1,4 @@
-"use strict";
-
-const semver = require("semver");
+import semver from "semver";
 
 const ignoredVersionPatterns = /^[^0-9]|[0-9]{4}-[0-9]{2}-[0-9]{2}/;
 function addv(version) {
@@ -26,4 +24,4 @@ function semverVersionColor(version) {
   return "blue";
 }
 
-module.exports = { addv, semverVersionColor };
+export { addv, semverVersionColor };
