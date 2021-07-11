@@ -2,7 +2,7 @@
 
 const { promises: fs } = require("fs");
 const core = require("@actions/core");
-const { BaseAction, invoke } = require("@action-badges/core");
+const { BaseAction } = require("@action-badges/core");
 const { addv, semverVersionColor } = require("./formatters");
 
 class PackageJsonLicense extends BaseAction {
@@ -80,7 +80,12 @@ class PackageJsonNodeVersion extends BaseAction {
   }
 }
 
-async function run() {
+function fail(message) {
+  core.setFailed(message);
+  throw new Error(message);
+}
+
+function getAction() {
   const integration = core.getInput("integration", { required: true });
   const validIntegrations = {
     license: PackageJsonLicense,
@@ -88,16 +93,14 @@ async function run() {
     version: PackageJsonVersion,
   };
   if (integration in validIntegrations) {
-    return await invoke(validIntegrations[integration]);
+    return validIntegrations[integration];
   }
-  core.setFailed(
-    `integration must be one of (${Object.keys(validIntegrations)})`
-  );
+  fail(`integration must be one of (${Object.keys(validIntegrations)})`);
 }
 
 module.exports = {
   PackageJsonLicense,
   PackageJsonNodeVersion,
   PackageJsonVersion,
-  run,
+  getAction,
 };

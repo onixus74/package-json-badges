@@ -5,6 +5,7 @@ const {
   PackageJsonLicense,
   PackageJsonNodeVersion,
   PackageJsonVersion,
+  getAction,
 } = require("./lib");
 
 describe("PackageJsonLicense", function () {
@@ -74,5 +75,30 @@ describe("PackageJsonNodeVersion", function () {
       { message: "^12.18.3", messageColor: "blue" },
       badge
     );
+  });
+});
+
+describe("getAction", function () {
+  afterEach(function () {
+    delete process.env["INPUT_INTEGRATION"];
+  });
+
+  it("Returns the correct action class with expected inputs", function () {
+    process.env["INPUT_INTEGRATION"] = "license";
+    assert.strictEqual(PackageJsonLicense, getAction());
+
+    process.env["INPUT_INTEGRATION"] = "node-version";
+    assert.strictEqual(PackageJsonNodeVersion, getAction());
+
+    process.env["INPUT_INTEGRATION"] = "version";
+    assert.strictEqual(PackageJsonVersion, getAction());
+  });
+
+  it("Throws an exception with unexpected inputs", function () {
+    process.env["INPUT_INTEGRATION"] = "invalid";
+    assert.throws(() => getAction(), {
+      name: "Error",
+      message: "integration must be one of (license,node-version,version)",
+    });
   });
 });
