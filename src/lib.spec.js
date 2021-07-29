@@ -76,6 +76,16 @@ describe("PackageJsonNodeVersion", function () {
       badge
     );
   });
+
+  it("strips whitespace from ranges", async function () {
+    const stub = new PackageJsonNodeVersion();
+    stub.fetch = () => ({ engines: { node: ">= 12, <14" } });
+    const badge = await stub.render();
+    assert.deepStrictEqual(
+      { message: ">=12,<14", messageColor: "blue" },
+      badge
+    );
+  });
 });
 
 describe("getAction", function () {
