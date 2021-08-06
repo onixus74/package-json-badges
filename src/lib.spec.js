@@ -22,7 +22,7 @@ describe("PackageJsonLicense", function () {
     const stub = new PackageJsonLicense();
     stub.fetch = () => ({ license: "MIT" });
     const badge = await stub.render();
-    assert.deepStrictEqual({ message: "MIT", messageColor: "blue" }, badge);
+    assert.deepStrictEqual(badge, { message: "MIT", messageColor: "blue" });
   });
 });
 
@@ -40,17 +40,17 @@ describe("PackageJsonVersion", function () {
     const stub = new PackageJsonVersion();
     stub.fetch = () => ({ version: "1.0.1" });
     const badge = await stub.render();
-    assert.deepStrictEqual({ message: "v1.0.1", messageColor: "blue" }, badge);
+    assert.deepStrictEqual(badge, { message: "v1.0.1", messageColor: "blue" });
   });
 
   it("renders if file is valid (pre release)", async function () {
     const stub = new PackageJsonVersion();
     stub.fetch = () => ({ version: "0.2.3" });
     const badge = await stub.render();
-    assert.deepStrictEqual(
-      { message: "v0.2.3", messageColor: "orange" },
-      badge
-    );
+    assert.deepStrictEqual(badge, {
+      message: "v0.2.3",
+      messageColor: "orange",
+    });
   });
 });
 
@@ -71,20 +71,20 @@ describe("PackageJsonNodeVersion", function () {
     const stub = new PackageJsonNodeVersion();
     stub.fetch = () => ({ engines: { node: "^12.18.3" } });
     const badge = await stub.render();
-    assert.deepStrictEqual(
-      { message: "^12.18.3", messageColor: "blue" },
-      badge
-    );
+    assert.deepStrictEqual(badge, {
+      message: "^12.18.3",
+      messageColor: "blue",
+    });
   });
 
   it("strips whitespace from ranges", async function () {
     const stub = new PackageJsonNodeVersion();
     stub.fetch = () => ({ engines: { node: ">= 12, <14" } });
     const badge = await stub.render();
-    assert.deepStrictEqual(
-      { message: ">=12,<14", messageColor: "blue" },
-      badge
-    );
+    assert.deepStrictEqual(badge, {
+      message: ">=12,<14",
+      messageColor: "blue",
+    });
   });
 });
 
@@ -95,13 +95,13 @@ describe("getAction", function () {
 
   it("Returns the correct action class with expected inputs", function () {
     process.env["INPUT_INTEGRATION"] = "license";
-    assert.strictEqual(PackageJsonLicense, getAction());
+    assert.strictEqual(getAction(), PackageJsonLicense);
 
     process.env["INPUT_INTEGRATION"] = "node-version";
-    assert.strictEqual(PackageJsonNodeVersion, getAction());
+    assert.strictEqual(getAction(), PackageJsonNodeVersion);
 
     process.env["INPUT_INTEGRATION"] = "version";
-    assert.strictEqual(PackageJsonVersion, getAction());
+    assert.strictEqual(getAction(), PackageJsonVersion);
   });
 
   it("Throws an exception with unexpected inputs", function () {
